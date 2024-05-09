@@ -107,5 +107,7 @@ class contact_model {
         $totalQuery = "SELECT COUNT(contact_id) AS total FROM contacts";
         return $totalQuery;
     }
+
+
 }
 ?>

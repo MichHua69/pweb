@@ -3,40 +3,43 @@
 include_once 'config/conn.php';
 
 class user_model {
-    
-    
     static function index() {
         global $conn;
-
-        $stmt = $conn->prepare("SELECT * FROM users");
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        // Pagination
         $rowsPerPage = 10;
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         $offset = ($page - 1) * $rowsPerPage;
     
-        $totalQuery = "SELECT COUNT(user_id) AS total FROM users";
-        $totalResult = $conn->query($totalQuery);
-        $totalRow = $totalResult->fetch_assoc();
-        $totalPages = ceil($totalRow['total'] / $rowsPerPage);
-
         $stmt = $conn->prepare("SELECT * FROM `users` LIMIT ?, ?");
         $stmt->bind_param("ii", $offset, $rowsPerPage);
         $stmt->execute();
         $result = $stmt->get_result();
-    
-        // Mengembalikan array yang berisi semua nilai yang ingin Anda kembalikan
-        return array(
-            'result' => $result,
-            'rowsPerPage' => $rowsPerPage,
+        // Mengambil semua baris hasil dan menyimpannya dalam array
+        $rows = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        } else {
+            echo "Tidak ada data yang ditemukan.";
+        }
+
+        // Menyimpan semua data yang diperlukan dalam array dan mengembalikannya
+        $data = [
+            'rowPerPage' => $rowsPerPage,
             'page' => $page,
-            // 'offset' => $offset,
-            'totalResult' => $totalResult,
-            'totalRow' => $totalRow,
-            'totalPages' => $totalPages,
-        );
+            'offset' => $offset,
+            'result' => $rows, // Menggunakan array baris yang sudah diambil
+        ];
+        return $data;
+    }
+    
+
+    static function show() {
+        global $conn;
+        $stmt = $conn->prepare("SELECT * FROM `users`");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result;
     }
 
     static function create($username, $password, $role) {
@@ -68,8 +71,6 @@ class user_model {
 
     static function delete($user_id) {
         global $conn;
-
-        // Start transaction to ensure data integrity
         $conn->begin_transaction();
 
         try {
@@ -92,13 +93,26 @@ class user_model {
         session_start();
         if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             // Redirect to login page or display access denied message
-            header("Location: /login");
+            header("Location: login");
             exit();
         }
     }
-    
+
     static function totalQuery(){
-        $totalQuery = "SELECT COUNT(contact_id) AS total FROM contacts";
+        $totalQuery = "SELECT COUNT(user_id) AS total FROM users";
         return $totalQuery;
+    }
+
+    public static function getUserByUsername($username) {
+        global $conn;
+
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $stmt->close();
+
+        return $user;
     }
 }

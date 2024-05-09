@@ -64,13 +64,13 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            <?php while ($row = $result->fetch_assoc()): ?>
+                            <?php foreach ($result as $row): ?>
                             <tr class="bg-white border-b hover:bg-gray-50">
                                 <td class="w-32 py-2 md:py-3 px-3 md:px-6"><?php echo htmlspecialchars($row['user_id']); ?></td>
                                 <td class="w-64 py-2 md:py-3 px-3 md:px-6"><?php echo htmlspecialchars($row['username']); ?></td>
-                                <td class="w-96 py-2 md:py-3 px-3 md:px-6"><?php echo str_repeat('*',strlen($row['password'])); ?></td>
+                                <td class="w-96 py-2 md:py-3 px-3 md:px-6"><?php echo str_repeat('*', strlen($row['password'])); ?></td>
                             </tr>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
