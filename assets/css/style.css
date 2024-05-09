@@ -175,11 +175,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('./assets/background.jpg') center/cover no-repeat;
+    background: url('/assets/images/background.jpg');
     filter: blur(2px);
     z-index: -1;
     animation: applyBlur 2s forwards 2s;
-    /* filter: none; */
     animation: applyBlur 0.5s ease-in-out 2s forwards;
 
 }

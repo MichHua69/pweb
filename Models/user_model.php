@@ -4,6 +4,41 @@ include_once 'config/conn.php';
 
 class user_model {
     
+    
+    static function index() {
+        global $conn;
+
+        $stmt = $conn->prepare("SELECT * FROM users");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Pagination
+        $rowsPerPage = 10;
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $offset = ($page - 1) * $rowsPerPage;
+    
+        $totalQuery = "SELECT COUNT(user_id) AS total FROM users";
+        $totalResult = $conn->query($totalQuery);
+        $totalRow = $totalResult->fetch_assoc();
+        $totalPages = ceil($totalRow['total'] / $rowsPerPage);
+
+        $stmt = $conn->prepare("SELECT * FROM `users` LIMIT ?, ?");
+        $stmt->bind_param("ii", $offset, $rowsPerPage);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        // Mengembalikan array yang berisi semua nilai yang ingin Anda kembalikan
+        return array(
+            'result' => $result,
+            'rowsPerPage' => $rowsPerPage,
+            'page' => $page,
+            // 'offset' => $offset,
+            'totalResult' => $totalResult,
+            'totalRow' => $totalRow,
+            'totalPages' => $totalPages,
+        );
+    }
+
     static function create($username, $password, $role) {
         global $conn;
         $conn->begin_transaction(); // Mulai transaksi
@@ -53,6 +88,17 @@ class user_model {
         }
     }
     
-    // Tambahkan metode lain yang dibutuhkan untuk model pengguna di sini...
+    public static function requireLogin() {
+        session_start();
+        if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+            // Redirect to login page or display access denied message
+            header("Location: /login");
+            exit();
+        }
+    }
     
+    static function totalQuery(){
+        $totalQuery = "SELECT COUNT(contact_id) AS total FROM contacts";
+        return $totalQuery;
+    }
 }

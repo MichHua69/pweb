@@ -3,37 +3,31 @@ include_once 'config/conn.php';
 
 class contact_model {
     
+    static function index() {
+        global $conn;
+        $rowsPerPage = 5;
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $offset = ($page - 1) * $rowsPerPage;
+    
+        $stmt = $conn->prepare("SELECT * FROM `contacts` LIMIT ?, ?");
+        $stmt->bind_param("ii", $offset, $rowsPerPage);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $data = [
+            'rowPerPage'=>$rowsPerPage,
+            'page'=>$page,
+            'offset'=>$offset,
+            'result'=>$result,
+        ];
+        return $data;
+    }
+
     static function show() {
         global $conn;
         $stmt = $conn->prepare("SELECT * FROM `contacts`");
         $stmt->execute();
         $result = $stmt->get_result();
-
-        // Pagination
-        $rowsPerPage = 5;
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $offset = ($page - 1) * $rowsPerPage;
-    
-        $totalQuery = "SELECT COUNT(contact_id) AS total FROM contacts";
-        $totalResult = $conn->query($totalQuery);
-        $totalRow = $totalResult->fetch_assoc();
-        $totalPages = ceil($totalRow['total'] / $rowsPerPage);
-
-        $stmt = $conn->prepare("SELECT * FROM `contacts` LIMIT ?, ?");
-        $stmt->bind_param("ii", $offset, $rowsPerPage);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    
-        // Mengembalikan array yang berisi semua nilai yang ingin Anda kembalikan
-        return array(
-            'result' => $result,
-            'rowsPerPage' => $rowsPerPage,
-            'page' => $page,
-            // 'offset' => $offset,
-            'totalResult' => $totalResult,
-            'totalRow' => $totalRow,
-            'totalPages' => $totalPages,
-        );
     }
 
     static function create($userId, $name, $email, $address, $phone_number) {
@@ -107,6 +101,11 @@ class contact_model {
             $roles[] = $role;
         }
         return $roles;
+    }
+
+    static function totalQuery(){
+        $totalQuery = "SELECT COUNT(contact_id) AS total FROM contacts";
+        return $totalQuery;
     }
 }
 ?>

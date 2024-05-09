@@ -1,14 +1,23 @@
 <?php
 
+
+route('/', 'get', function () {
+    echo ('Halo, test 1 2 3');
+});
+//auth
+route('login', 'get', 'authController::login');
+route('login', 'post', 'authController::login');
+route('register', 'get', 'authController::register');
+route('register', 'post', 'authController::register');
+
+
 route('contact','get' , 'contactController::index');
 route('contact.store','post' , 'contactController::create');
 route('contact.edit','post' , 'contactController::edit');
 route('contact.delete','post' , 'contactController::delete');
 
+route('account', 'get', 'accountController::index');
 
-route('/', 'get', function () {
-    echo ('Halo, test 1 2 3');
-});
-route('account', 'get', function () {
-    echo ('ACCOUNT');
-});
+route('dashboard', 'get', 'dashboardController::index');
+
+route('logout', 'get', 'authController::logout');

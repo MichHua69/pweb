@@ -15,11 +15,11 @@
             </div>
         
             <div class="flex-1 overflow-y-auto">
-                <a href="./dashboard.php" class="flex items-center px-3 md:px-5 py-4 hover:bg-neutral-500 transition duration-150 ease-in-out cursor-pointer text-sm md:text-lg font-semibold">
+                <a href="<?=urlpath('dashboard')?>" class="flex items-center px-3 md:px-5 py-4 hover:bg-neutral-500 transition duration-150 ease-in-out cursor-pointer text-sm md:text-lg font-semibold">
                     <span class="fi-rr-dashboard mr-2" style="display: inline-block;"></span>
                     <span>Dashboard</span>
                 </a>
-                <a href="./contact.php" class="flex items-center px-3 md:px-5 py-4 hover:bg-neutral-500 transition duration-150 ease-in-out cursor-pointer text-sm md:text-lg font-semibold">
+                <a href="<?= urlpath('contact')?>" class="flex items-center px-3 md:px-5 py-4 hover:bg-neutral-500 transition duration-150 ease-in-out cursor-pointer text-sm md:text-lg font-semibold">
                     <span class="fi-rr-dashboard mr-2" style="display: inline-block;"></span>
                     <span>Contact</span>
                 </a>
@@ -33,7 +33,7 @@
 
             <div class="mt-auto p-3 md:p-5">
                 <button class="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded">
-                    <a href="logout.php" class="block w-full text-center text-sm md:text-base">Logout</a>
+                    <a href="<?=urlpath('logout')?>" class="block w-full text-center text-sm md:text-base">Logout</a>
                 </button>
             </div>
         </aside>
@@ -45,10 +45,10 @@
             </header>
 
             <main class="flex-grow relative">
-                <div class="text-gray-800 text-lg md:text-2xl font-semibold mt-1 md:mt-4 pl-3 md:pl-5 bg-white py-3 md:py-4 w-full">Account</div>
+                <div class="text-gray-800 text-lg md:text-2xl font-semibold mt-1 md:mt-4 pl-3 md:pl-5 bg-white py-3 md:py-4 w-full">Contact</div>
                 <div class="bg-white p-4 md:p-6 rounded shadow m-4 md:m-8">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg md:text-xl font-semibold">Account Table</h3>
+                        <h3 class="text-lg md:text-xl font-semibold">Contact Table</h3>
                         <button class="bg-blue-500 text-white px-3 md:px-4 py-2 rounded hover:bg-blue-600 text-sm md:text-base create-btn" onclick="modals()">
                             Create Data
                         </button>

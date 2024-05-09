@@ -4,18 +4,22 @@ include_once 'Models/user_model.php';
 
 
 class contactController {
-    static function acc() {
-        view('account');
-    }
     static function index() { 
-        $data = contact_model::show();
-        $result = $data['result'];
-        $rowsPerPage = $data['rowsPerPage'];
+        authController::requireLogin();
+
+        global $conn;
+        $data = contact_model::index();
+        $rowsPerPage = $data['rowPerPage'];
         $page = $data['page'];
-        $totalPages = $data['totalPages'];
-        $offset = ($page - 1) * $rowsPerPage;
+        $offset = $data['offset'];
+        $result = $data['result'];
+
+        $totalQuery = contact_model::totalQuery();
+        $totalResult = $conn->query($totalQuery);
+        $totalRow = $totalResult->fetch_assoc();
+        $totalPages = ceil($totalRow['total'] / $rowsPerPage);
         $roles = contact_model::getRoles();
-        // var_dump($data);
+
         view('contact', [
             'result' => $result,
             'rowsPerPage' => $rowsPerPage,
@@ -25,9 +29,7 @@ class contactController {
             'roles' => $roles,
         ]);
     }
-    // static function create() {
-    //     var_dump($_SERVER);
-    // }
+
     static function create() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['action']) && $_POST['action'] === 'create') {

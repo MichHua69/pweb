@@ -44,26 +44,23 @@
         </header>
 
         <main class="flex-grow relative">
-            <div class="text-gray-800 text-lg md:text-2xl font-semibold mt-1     md:mt-4 pl-3 md:pl-5 bg-white py-3 md:py-4 w-full">Account</div>
+            <div class="text-gray-800 text-lg md:text-2xl font-semibold mt-1     md:mt-4 pl-3 md:pl-5 bg-white py-3 md:py-4 w-full">Dashboard</div>
             <div class="bg-white p-4 md:p-6 rounded shadow m-4 md:m-8">
                 <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg md:text-xl font-semibold">Account Table</h3>
-                    <button class="hidden bg-blue-500 text-white px-3 md:px-4 py-2 rounded hover:bg-blue-600 text-sm md:text-base">
-                        + Tambah Data
-                    </button>
+                    <h3 class="text-lg md:text-xl font-semibold"></h3>
                 </div>
 
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm md:text-base text-left">
-                        <thead class="text-xs md:text-sm bg-neutral-200 uppercase bg-gray-100 text-center">
+                        <thead class="text-xs md:text-sm bg-neutral-200 uppercase bg-gray-100">
                             <tr>
                                 <th class="py-2 md:py-3 px-3 md:px-6">ID</th>
                                 <th class="py-2 md:py-3 px-3 md:px-6">Username</th>
                                 <th class="py-2 md:py-3 px-3 md:px-6">Password</th>
                             </tr>
                         </thead>
-                        <tbody class="text-center">
+                        <tbody>
                             <?php while ($row = $result->fetch_assoc()): ?>
                             <tr class="bg-white border-b hover:bg-gray-50">
                                 <td class="w-32 py-2 md:py-3 px-3 md:px-6"><?php echo htmlspecialchars($row['user_id']); ?></td>
