@@ -6,8 +6,11 @@ include_once 'Models/user_model.php';
 class dashboardController {
     static function index() { 
         authController::requireLogin();
-
-        view('dashboard');
+        $user = user_model::getUserByUsername($_SESSION['username']) ;
+            
+        view('dashboard',[
+            'user' => $user,
+        ]);
     }
 
 }

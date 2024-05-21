@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `contacts` (
   `contact_id` int NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone_number` varchar(50) DEFAULT NULL,
+  `name` varchar(255) ,
+  `email` varchar(255) ,
+  `phone_number` varchar(50) ,
   `address` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

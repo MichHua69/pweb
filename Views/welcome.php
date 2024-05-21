@@ -6,8 +6,8 @@
     <title>welcome</title>
 </head>
 <body>
-    <a href="">Login</a>
-    <a href="">Register</a>
+    <a href="<?= urlpath('login');?>">Login</a>
+    <a href="<?= urlpath('register');?>">Register</a>
     <a href="<?= urlpath('contact');?>">Contact</a>
 </body>
 </html>

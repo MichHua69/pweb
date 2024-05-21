@@ -115,4 +115,17 @@ class user_model {
 
         return $user;
     }
+
+    public static function getUserById($user_id) {
+        global $conn;
+
+        $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $stmt->close();
+
+        return $user;
+    }
 }

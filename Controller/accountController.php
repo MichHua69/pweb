@@ -17,7 +17,8 @@ class accountController {
         $totalResult = $conn->query($totalQuery);
         $totalRow = $totalResult->fetch_assoc();
         $totalPages = ceil($totalRow['total'] / $rowsPerPage);
-
+        
+        $user = user_model::getUserByUsername($_SESSION['username']) ;
         // Mengirimkan data ke tampilan
         view('account', [
             'result' => $result,
@@ -25,6 +26,7 @@ class accountController {
             'halaman' => $page,
             'totalPages' => $totalPages,
             'offset' => $offset,
+            'user' => $user,
         ]);
     }
 }

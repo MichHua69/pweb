@@ -20,6 +20,7 @@ class contactController {
         $totalPages = ceil($totalRow['total'] / $rowsPerPage);
         $roles = contact_model::getRoles();
 
+        $user = user_model::getUserByUsername($_SESSION['username']) ;
         view('contact', [
             'result' => $result,
             'rowsPerPage' => $rowsPerPage,
@@ -27,6 +28,7 @@ class contactController {
             'totalPages' => $totalPages,
             'offset' => $offset,
             'roles' => $roles,
+            'user' => $user,
         ]);
     }
 

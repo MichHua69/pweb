@@ -94,7 +94,7 @@ class contact_model {
 
     static function getRoles() {
         global $conn;
-        $rolesQuery = "SELECT role_id, role_name FROM roles";
+        $rolesQuery = "SELECT role_id, role_name FROM roles ORDER BY role_id ASC";
         $rolesResult = $conn->query($rolesQuery);
         $roles = array();
         while ($role = $rolesResult->fetch_assoc()) {

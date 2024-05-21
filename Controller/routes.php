@@ -2,7 +2,7 @@
 
 
 route('/', 'get', function () {
-    echo ('Halo, test 1 2 3');
+    view('welcome');
 });
 //auth
 route('login', 'get', 'authController::login');
