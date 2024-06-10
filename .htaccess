@@ -1,6 +1,6 @@
 RewriteEngine On
-RewriteBase /pweb/
+RewriteBase /J-Layer/
 RewriteRule ^index\\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /pweb/index.php [L]
+RewriteRule . /J-Layer/index.php [L]

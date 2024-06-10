@@ -2,7 +2,7 @@
 
 function view($page, $data=[]) {
     extract($data);
-    include 'Views/'.$page.'.php';
+    include 'view/'.$page.'.php';
 }
 
 $urls = [];

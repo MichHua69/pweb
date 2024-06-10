@@ -1,0 +1,100 @@
+.main-image {
+  z-index: -1;
+}
+#login-btn,
+#register-btn,
+#ajukan-btn {
+  padding: 12.5px 30px;
+  border: 0;
+  border-radius: 100px;
+  font-weight: Bold;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+#login-btn {
+  background-color: #ffffff;
+  color: #ffc100;
+}
+
+#register-btn {
+  background-color: #ffffff;
+  color: #ffc100;
+}
+
+#login-btn:hover,
+#register-btn:hover {
+  background-color: #ffc100;
+  color: #ffffff;
+  box-shadow: 0 0 20px #3d94cf50;
+  transform: scale(1.1);
+}
+
+#ajukan-btn {
+  background-color: #ffffff;
+  color: #ffc100;
+  box-shadow: 0px 3px 20px #00000030;
+}
+
+#ajukan-btn:hover {
+  background-color: #ffc100;
+  color: #ffffff;
+  box-shadow: 0 0 20px #3d94cf50;
+  transform: scale(1.1);
+}
+
+.tab-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  position: relative;
+  background-color: #ebebec;
+  border-radius: 9px;
+  margin: 10px 20px 0px 20px;
+}
+
+.indicator {
+  content: "";
+  width: 50%;
+  height: 28px;
+  background: #ffc100;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: 9;
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 7px;
+  transition: all 0.2s ease-out;
+}
+
+.tab {
+  width: 50%;
+  height: 28px;
+  position: relative;
+  z-index: 99;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  flex: none;
+  align-self: stretch;
+  flex-grow: 1;
+  cursor: pointer;
+  font-weight: 500;
+}
+.form-content {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.form-content.hidden {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.preview {
+  scrollbar-width: none;
+}
+
+
